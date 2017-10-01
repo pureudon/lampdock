@@ -1,0 +1,1 @@
+docker exec -i xxxxxxx_mysql_1 mysql -uroot -p[DB root 密碼] [DB 預設資料庫] < 20170129-1800.sql

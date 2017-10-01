@@ -1,0 +1,46 @@
+version: '3'
+services:
+
+  php-httpd:
+    build: ./php-httpd/
+    ports:
+      - 80:80
+    expose:
+        - 80
+    volumes:
+        - ./web/:/var/www/html
+        - ./php-httpd/php70.ini:/usr/local/etc/php/php.ini:ro
+        # - ./php-httpd/sites:/etc/apache2/sites-available
+        # - ./php-httpd/sites:/etc/apache2/sites-enabled
+        - ./php-httpd/apache2.conf:/etc/apache2/apache2.conf
+        
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/db_data/var/lib/mysql/:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: project
+      MYSQL_USER: project
+      MYSQL_PASSWORD: project
+
+  # maria_db:
+  #   container_name: mariadb
+  #   image: mariadb
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: docker
+  #   ports:
+  #     - 3306:3306
+  #   expose:
+  #     - "3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+      # PMA_USER: root
+      # PMA_PASSWORD: docker

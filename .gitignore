@@ -1,0 +1,6 @@
+*.pyc
+.idea/
+*.db
+.DS_Store
+.vscode/
+mysql/db_data/*
