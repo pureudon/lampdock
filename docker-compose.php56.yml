@@ -1,18 +1,18 @@
 version: '3'
 services:
 
-  php70-httpd:
-    build: ./php70-httpd/
+  php56-httpd:
+    build: ./php56-httpd/
     ports:
       - 80:80
     expose:
         - 80
     volumes:
         - ./web/:/var/www/html
-        - ./php70-httpd/php70.ini:/usr/local/etc/php/php.ini:ro
-        # - ./php-httpd/sites:/etc/apache2/sites-available
-        # - ./php-httpd/sites:/etc/apache2/sites-enabled
-        - ./php70-httpd/apache2.conf:/etc/apache2/apache2.conf
+        - ./php56-httpd/php56.ini:/usr/local/etc/php/php.ini:ro
+        # - ./php56-httpd/sites:/etc/apache2/sites-available
+        # - ./php56-httpd/sites:/etc/apache2/sites-enabled
+        - ./php56-httpd/apache2.conf:/etc/apache2/apache2.conf
         
   mysql:
     image: mysql:latest
