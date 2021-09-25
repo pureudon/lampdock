@@ -1,18 +1,19 @@
 version: '3'
 services:
 
-  php56-httpd:
-    build: ./php56-httpd/
+  php70-httpd:
+    # IMAGE: php:7.0-apache (Dockerfile)
+    build: ./php70-httpd/
     ports:
       - 80:80
     expose:
         - 80
     volumes:
         - ./web/:/var/www/html
-        - ./php56-httpd/php56.ini:/usr/local/etc/php/php.ini:ro
-        # - ./php56-httpd/sites:/etc/apache2/sites-available
-        # - ./php56-httpd/sites:/etc/apache2/sites-enabled
-        - ./php56-httpd/apache2.conf:/etc/apache2/apache2.conf
+        - ./php70-httpd/php70.ini:/usr/local/etc/php/php.ini:ro
+        # - ./php-httpd/sites:/etc/apache2/sites-available
+        - ./php70-httpd/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+        - ./php70-httpd/apache2.conf:/etc/apache2/apache2.conf
         
   mysql:
     image: mysql:5.7.19
@@ -21,6 +22,7 @@ services:
     volumes:
       - ./mysql/db_data/var/lib/mysql/:/var/lib/mysql
     environment:
+      # these parameter only used for database creation
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: project
       MYSQL_USER: project
